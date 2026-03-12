@@ -5,312 +5,12 @@ import { FaCaretLeft } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { FaAngleRight } from "react-icons/fa";
 
-const categories: Category[] = [
-  {
-    _id: "c1",
-    image: "https://picsum.photos/200",
-    name: "Dụng cụ điện",
-    slug: "dung-cu-dien",
-    parentId: null,
-  },
-  {
-    _id: "c2",
-    image: "https://picsum.photos/200",
-    name: "Dụng cụ cầm tay",
-    slug: "dung-cu-cam-tay",
-    parentId: null,
-  },
-  {
-    _id: "c3",
-    image: "https://picsum.photos/200",
-    name: "Thiết bị công nghiệp",
-    slug: "thiet-bi-cong-nghiep",
-    parentId: null,
-  },
-  {
-    _id: "c4",
-    image: "https://picsum.photos/200",
-    name: "Máy móc xây dựng",
-    slug: "may-moc-xay-dung",
-    parentId: null,
-  },
-  {
-    _id: "c5",
-    image: "https://picsum.photos/200",
-    name: "Thiết bị điện",
-    slug: "thiet-bi-dien",
-    parentId: null,
-  },
-  {
-    _id: "c6",
-    image: "https://picsum.photos/200",
-    name: "Phụ kiện máy",
-    slug: "phu-kien-may",
-    parentId: null,
-  },
-  {
-    _id: "c7",
-    image: "https://picsum.photos/200",
-    name: "Thiết bị đo lường",
-    slug: "thiet-bi-do-luong",
-    parentId: null,
-  },
-  {
-    _id: "c8",
-    image: "https://picsum.photos/200",
-    name: "Vật tư cơ khí",
-    slug: "vat-tu-co-khi",
-    parentId: null,
-  },
-  {
-    _id: "c9",
-    image: "https://picsum.photos/200",
-    name: "Thiết bị an toàn",
-    slug: "thiet-bi-an-toan",
-    parentId: null,
-  },
-  {
-    _id: "c10",
-    image: "https://picsum.photos/200",
-    name: "Thiết bị gia dụng",
-    slug: "thiet-bi-gia-dung",
-    parentId: null,
-  },
-
-  {
-    _id: "c1-1",
-    image: "https://picsum.photos/200",
-    name: "Máy khoan",
-    slug: "may-khoan",
-    parentId: "c1",
-  },
-  {
-    _id: "c1-2",
-    image: "https://picsum.photos/200",
-    name: "Máy mài",
-    slug: "may-mai",
-    parentId: "c1",
-  },
-  {
-    _id: "c1-3",
-    image: "https://picsum.photos/200",
-    name: "Máy cắt",
-    slug: "may-cat",
-    parentId: "c1",
-  },
-  {
-    _id: "c1-4",
-    image: "https://picsum.photos/200",
-    name: "Máy cắt",
-    slug: "may-cat",
-    parentId: "c1",
-  },
-  {
-    _id: "c1-5",
-    image: "https://picsum.photos/200",
-    name: "Máy cắt",
-    slug: "may-cat",
-    parentId: "c1",
-  },
-  {
-    _id: "c1-6",
-    image: "https://picsum.photos/200",
-    name: "Máy cắt",
-    slug: "may-cat",
-    parentId: "c1",
-  },
-  {
-    _id: "c1-7",
-    image: "https://picsum.photos/200",
-    name: "Máy cắt",
-    slug: "may-cat",
-    parentId: "c1",
-  },
-  {
-    _id: "c1-8",
-    image: "https://picsum.photos/200",
-    name: "Máy cắt",
-    slug: "may-cat",
-    parentId: "c1",
-  },
-  {
-    _id: "c1-9",
-    image: "https://picsum.photos/200",
-    name: "Máy cắt",
-    slug: "may-cat",
-    parentId: "c1",
-  },
-  {
-    _id: "c1-10",
-    image: "https://picsum.photos/200",
-    name: "Máy cắt",
-    slug: "may-cat",
-    parentId: "c1",
-  },
-
-  {
-    _id: "c1-1-1",
-    image: "https://picsum.photos/200",
-    name: "Khoan bê tông",
-    slug: "khoan-be-tong",
-    parentId: "c1-1",
-  },
-  {
-    _id: "c1-1-2",
-    image: "https://picsum.photos/200",
-    name: "Khoan pin",
-    slug: "khoan-pin",
-    parentId: "c1-1",
-  },
-
-  {
-    _id: "c2-1",
-    image: "https://picsum.photos/200",
-    name: "Búa",
-    slug: "bua",
-    parentId: "c2",
-  },
-  {
-    _id: "c2-2",
-    image: "https://picsum.photos/200",
-    name: "Cờ lê - mỏ lết",
-    slug: "co-le-mo-let",
-    parentId: "c2",
-  },
-  {
-    _id: "c2-3",
-    image: "https://picsum.photos/200",
-    name: "Tua vít",
-    slug: "tua-vit",
-    parentId: "c2",
-  },
-
-  {
-    _id: "c3-1",
-    image: "https://picsum.photos/200",
-    name: "Máy nén khí",
-    slug: "may-nen-khi",
-    parentId: "c3",
-  },
-  {
-    _id: "c3-2",
-    image: "https://picsum.photos/200",
-    name: "Máy phát điện",
-    slug: "may-phat-dien",
-    parentId: "c3",
-  },
-
-  {
-    _id: "c4-1",
-    name: "Máy trộn bê tông",
-    image: "https://picsum.photos/200",
-    slug: "may-tron-be-tong",
-    parentId: "c4",
-  },
-  {
-    _id: "c4-2",
-    image: "https://picsum.photos/200",
-    name: "Máy đầm",
-    slug: "may-dam",
-    parentId: "c4",
-  },
-
-  {
-    _id: "c5-1",
-    image: "https://picsum.photos/200",
-    name: "Ổ cắm - công tắc",
-    slug: "o-cam-cong-tac",
-    parentId: "c5",
-  },
-  {
-    _id: "c5-2",
-    image: "https://picsum.photos/200",
-    name: "Dây điện",
-    slug: "day-dien",
-    parentId: "c5",
-  },
-
-  {
-    _id: "c6-1",
-    image: "https://picsum.photos/200",
-    name: "Mũi khoan",
-    slug: "mui-khoan",
-    parentId: "c6",
-  },
-  {
-    _id: "c6-2",
-    image: "https://picsum.photos/200",
-    name: "Đá cắt",
-    slug: "da-cat",
-    parentId: "c6",
-  },
-
-  {
-    _id: "c7-1",
-    image: "https://picsum.photos/200",
-    name: "Thước đo",
-    slug: "thuoc-do",
-    parentId: "c7",
-  },
-  {
-    _id: "c7-2",
-    image: "https://picsum.photos/200",
-    name: "Máy đo điện",
-    slug: "may-do-dien",
-    parentId: "c7",
-  },
-
-  {
-    _id: "c8-1",
-    image: "https://picsum.photos/200",
-    name: "Bulông - ốc vít",
-    slug: "bu-long-oc-vit",
-    parentId: "c8",
-  },
-  {
-    _id: "c8-2",
-    image: "https://picsum.photos/200",
-    name: "Thanh ren",
-    slug: "thanh-ren",
-    parentId: "c8",
-  },
-
-  {
-    _id: "c9-1",
-    image: "https://picsum.photos/200",
-    name: "Mũ bảo hộ",
-    slug: "mu-bao-ho",
-    parentId: "c9",
-  },
-  {
-    _id: "c9-2",
-    image: "https://picsum.photos/200",
-    name: "Găng tay bảo hộ",
-    slug: "gang-tay-bao-ho",
-    parentId: "c9",
-  },
-
-  {
-    _id: "c10-1",
-    image: "https://picsum.photos/200",
-    name: "Quạt điện",
-    slug: "quat-dien",
-    parentId: "c10",
-  },
-  {
-    _id: "c10-2",
-    image: "https://picsum.photos/200",
-    name: "Nồi cơm điện",
-    slug: "noi-com-dien",
-    parentId: "c10",
-  },
-];
-
 type MenuMobileProps = {
   showMenu: boolean;
+  categories: Category[];
 };
 
-export const MenuMobile = ({ showMenu }: MenuMobileProps) => {
+export const MenuMobile = ({ showMenu, categories }: MenuMobileProps) => {
   const router = useRouter();
 
   const [activeCate, setActiveCate] = useState<string | null>(null);
@@ -323,7 +23,7 @@ export const MenuMobile = ({ showMenu }: MenuMobileProps) => {
         setActiveCate(firstParent._id);
       }
     }
-  }, [showMenu]);
+  }, [showMenu, categories]);
 
   return (
     <div
@@ -349,7 +49,7 @@ export const MenuMobile = ({ showMenu }: MenuMobileProps) => {
                   className="relative flex flex-col items-center border border-gray-200 p-2"
                 >
                   <Image
-                    src={cate.image}
+                    src={cate.image.url}
                     alt="ảnh danh mục"
                     width={1200}
                     height={900}
@@ -401,7 +101,7 @@ export const MenuMobile = ({ showMenu }: MenuMobileProps) => {
                     className="border border-gray-200 rounded-lg bg-white p-2 flex flex-col items-center gap-2 cursor-pointer"
                   >
                     <Image
-                      src={subCate.image}
+                      src={subCate.image.url}
                       alt="ảnh danh mục"
                       width={1200}
                       height={900}

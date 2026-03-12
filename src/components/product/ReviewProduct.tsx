@@ -52,15 +52,22 @@ const shorts = [
 export const ReviewProduct = () => {
   return (
     <div>
-      <div className="mb-2 flex items-center gap-2">
-        <h2 className="text-xl font-bold text-black uppercase">
-          Review sản phẩm
-        </h2>
-        <span className="text-xl font-extralight text-gray-400">|</span>
-        <button className="flex items-center gap-2 cursor-pointer p-2 hover:bg-gray-100 rounded-lg transition-colors duration-300">
-          <p className="text-blue-500 text-sm">Xem Youtube</p>
-          <FaAngleRight className="text-blue-500 text-sm" />
-        </button>
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-3">
+          <div className="w-1 h-6 bg-red-500 rounded-full shrink-0" />
+          <h2 className="text-lg md:text-xl font-bold text-gray-800 uppercase tracking-wide">
+            Review sản phẩm
+          </h2>
+        </div>
+        <a
+          href="https://www.youtube.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1.5 text-sm text-red-500 hover:text-red-700 font-medium transition-colors shrink-0"
+        >
+          <FaAngleRight className="text-xs" />
+          Xem YouTube
+        </a>
       </div>
       <div className="flex overflow-x-auto w-full scrollbar-hide">
         <div className="flex gap-2">

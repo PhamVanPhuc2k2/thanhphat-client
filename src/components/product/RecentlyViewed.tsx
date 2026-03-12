@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Product } from "@/src/types/product";
 import { ProductCard } from "./ProductCard";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import Link from "next/link";
 
 const products: Product[] = [
   {
@@ -261,10 +262,20 @@ export const RecentlyViewed = () => {
 
   return (
     <div>
-      <div className="mb-2">
-        <h2 className="text-xl text-black uppercase font-bold">
-          Sản phẩm bạn đã xem
-        </h2>
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-3">
+          <div className="w-1 h-6 bg-blue-600 rounded-full shrink-0" />
+          <h2 className="text-lg md:text-xl font-bold text-gray-800 uppercase tracking-wide">
+            Sản phẩm đã xem
+          </h2>
+        </div>
+        <Link
+          href="/product"
+          className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800 font-medium transition-colors shrink-0"
+        >
+          Xem thêm
+          <FaChevronRight className="text-xs" />
+        </Link>
       </div>
       <div className="relative">
         <button

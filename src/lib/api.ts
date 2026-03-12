@@ -5,16 +5,16 @@ export async function fetchProducts(params?: {
   page?: number;
   limit?: number;
   search?: string;
-  categoryId?: string;
-  brandId?: string;
-  sort?: string;
+  category?: string; // slug
+  brand?: string;    // slug
+  sort?: string;     // newest | price_asc | price_desc
 }) {
   const searchParams = new URLSearchParams();
   if (params?.page) searchParams.set("page", String(params.page));
   if (params?.limit) searchParams.set("limit", String(params.limit));
   if (params?.search) searchParams.set("search", params.search);
-  if (params?.categoryId) searchParams.set("categoryId", params.categoryId);
-  if (params?.brandId) searchParams.set("brandId", params.brandId);
+  if (params?.category) searchParams.set("category", params.category);
+  if (params?.brand) searchParams.set("brand", params.brand);
   if (params?.sort) searchParams.set("sort", params.sort);
 
   const res = await fetch(`${API_URL}/api/product/list?${searchParams}`, {
@@ -81,7 +81,11 @@ export async function fetchBanners(position?: string) {
 
 // ===== Articles =====
 export async function fetchArticles(page = 1, limit = 10) {
-  const params = new URLSearchParams({ page: String(page), limit: String(limit) });
+  const params = new URLSearchParams({
+    page: String(page),
+    limit: String(limit),
+    isPublished: "true",
+  });
   const res = await fetch(`${API_URL}/api/article/list?${params}`, {
     next: { revalidate: 60 },
   });
@@ -89,8 +93,8 @@ export async function fetchArticles(page = 1, limit = 10) {
   return res.json();
 }
 
-export async function fetchArticleById(id: string) {
-  const res = await fetch(`${API_URL}/api/article/${id}`, {
+export async function fetchArticleBySlug(slug: string) {
+  const res = await fetch(`${API_URL}/api/article/slug/${slug}`, {
     next: { revalidate: 60 },
   });
   if (!res.ok) return null;
@@ -103,6 +107,14 @@ export async function fetchPages() {
     next: { revalidate: 300 },
   });
   if (!res.ok) return { pages: [] };
+  return res.json();
+}
+
+export async function fetchPageBySlug(slug: string) {
+  const res = await fetch(`${API_URL}/api/page/slug/${slug}`, {
+    next: { revalidate: 300 },
+  });
+  if (!res.ok) return null;
   return res.json();
 }
 

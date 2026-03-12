@@ -8,7 +8,7 @@ import { FaAngleRight } from "react-icons/fa";
 type category = {
   _id: string;
   name: string;
-  image: string;
+  image: { url: string; public_id: string };
   slug: string;
   parentId: string | null;
 };
@@ -43,10 +43,10 @@ export const ShowMenu = ({ categories, onClose }: menuProps) => {
             >
               <div className="flex items-center gap-2">
                 <Image
-                  src={cate.image}
-                  alt="Ảnh"
-                  width={1200}
-                  height={900}
+                  src={cate.image.url}
+                  alt={cate.name}
+                  width={40}
+                  height={40}
                   className="h-10 w-10 object-cover"
                 />
                 <p className="text-sm text-black">{cate.name}</p>
@@ -56,26 +56,23 @@ export const ShowMenu = ({ categories, onClose }: menuProps) => {
           ))}
       </div>
       {activeMenu && (
-        <div
-          className={`w-4/5 bg-white border border-gray-200 rounded-lg shadow-lg p-5 space-y-2 ${
-            activeMenu ? "pointer-events-auto" : "pointer-events-none"
-          }`}
-        >
+        <div className="w-4/5 bg-white border border-gray-200 rounded-lg shadow-lg p-5 space-y-2">
           <div className="flex gap-2 flex-wrap">
             {categories
               .filter((cate) => cate.parentId === activeMenu)
               .map((cate) => (
                 <Link
                   href={`/product?cate=${cate.slug}`}
+                  onClick={onClose}
                   type="button"
                   key={cate._id}
                   className="flex items-center justify-between cursor-pointer p-2 hover:bg-gray-200 transition-colors duration-300 border border-gray-200 rounded-lg gap-2"
                 >
                   <Image
-                    src={cate.image}
-                    alt="Ảnh"
-                    width={1200}
-                    height={900}
+                    src={cate.image.url}
+                    alt={cate.name}
+                    width={40}
+                    height={40}
                     className="h-10 w-10 object-cover"
                   />
                   <p className="text-sm text-black">{cate.name}</p>

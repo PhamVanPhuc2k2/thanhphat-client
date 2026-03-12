@@ -13,310 +13,24 @@ import { SearchMobile } from "./SearchMobile";
 import { BsShop } from "react-icons/bs";
 import { ShowMenu } from "../../menu/ShowMenu";
 import { Category } from "@/src/types/category";
+import { useCart } from "@/src/context/CartContext";
+import { useRouter } from "next/navigation";
 
-const categories: Category[] = [
-  {
-    _id: "c1",
-    image: "https://picsum.photos/200",
-    name: "Dụng cụ điện",
-    slug: "dung-cu-dien",
-    parentId: null,
-  },
-  {
-    _id: "c2",
-    image: "https://picsum.photos/200",
-    name: "Dụng cụ cầm tay",
-    slug: "dung-cu-cam-tay",
-    parentId: null,
-  },
-  {
-    _id: "c3",
-    image: "https://picsum.photos/200",
-    name: "Thiết bị công nghiệp",
-    slug: "thiet-bi-cong-nghiep",
-    parentId: null,
-  },
-  {
-    _id: "c4",
-    image: "https://picsum.photos/200",
-    name: "Máy móc xây dựng",
-    slug: "may-moc-xay-dung",
-    parentId: null,
-  },
-  {
-    _id: "c5",
-    image: "https://picsum.photos/200",
-    name: "Thiết bị điện",
-    slug: "thiet-bi-dien",
-    parentId: null,
-  },
-  {
-    _id: "c6",
-    image: "https://picsum.photos/200",
-    name: "Phụ kiện máy",
-    slug: "phu-kien-may",
-    parentId: null,
-  },
-  {
-    _id: "c7",
-    image: "https://picsum.photos/200",
-    name: "Thiết bị đo lường",
-    slug: "thiet-bi-do-luong",
-    parentId: null,
-  },
-  {
-    _id: "c8",
-    image: "https://picsum.photos/200",
-    name: "Vật tư cơ khí",
-    slug: "vat-tu-co-khi",
-    parentId: null,
-  },
-  {
-    _id: "c9",
-    image: "https://picsum.photos/200",
-    name: "Thiết bị an toàn",
-    slug: "thiet-bi-an-toan",
-    parentId: null,
-  },
-  {
-    _id: "c10",
-    image: "https://picsum.photos/200",
-    name: "Thiết bị gia dụng",
-    slug: "thiet-bi-gia-dung",
-    parentId: null,
-  },
+type HeaderProps = {
+  categories: Category[];
+};
 
-  {
-    _id: "c1-1",
-    image: "https://picsum.photos/200",
-    name: "Máy khoan",
-    slug: "may-khoan",
-    parentId: "c1",
-  },
-  {
-    _id: "c1-2",
-    image: "https://picsum.photos/200",
-    name: "Máy mài",
-    slug: "may-mai",
-    parentId: "c1",
-  },
-  {
-    _id: "c1-3",
-    image: "https://picsum.photos/200",
-    name: "Máy cắt",
-    slug: "may-cat",
-    parentId: "c1",
-  },
-  {
-    _id: "c1-4",
-    image: "https://picsum.photos/200",
-    name: "Máy cắt",
-    slug: "may-cat",
-    parentId: "c1",
-  },
-  {
-    _id: "c1-5",
-    image: "https://picsum.photos/200",
-    name: "Máy cắt",
-    slug: "may-cat",
-    parentId: "c1",
-  },
-  {
-    _id: "c1-6",
-    image: "https://picsum.photos/200",
-    name: "Máy cắt",
-    slug: "may-cat",
-    parentId: "c1",
-  },
-  {
-    _id: "c1-7",
-    image: "https://picsum.photos/200",
-    name: "Máy cắt",
-    slug: "may-cat",
-    parentId: "c1",
-  },
-  {
-    _id: "c1-8",
-    image: "https://picsum.photos/200",
-    name: "Máy cắt",
-    slug: "may-cat",
-    parentId: "c1",
-  },
-  {
-    _id: "c1-9",
-    image: "https://picsum.photos/200",
-    name: "Máy cắt",
-    slug: "may-cat",
-    parentId: "c1",
-  },
-  {
-    _id: "c1-10",
-    image: "https://picsum.photos/200",
-    name: "Máy cắt",
-    slug: "may-cat",
-    parentId: "c1",
-  },
-
-  {
-    _id: "c1-1-1",
-    image: "https://picsum.photos/200",
-    name: "Khoan bê tông",
-    slug: "khoan-be-tong",
-    parentId: "c1-1",
-  },
-  {
-    _id: "c1-1-2",
-    image: "https://picsum.photos/200",
-    name: "Khoan pin",
-    slug: "khoan-pin",
-    parentId: "c1-1",
-  },
-
-  {
-    _id: "c2-1",
-    image: "https://picsum.photos/200",
-    name: "Búa",
-    slug: "bua",
-    parentId: "c2",
-  },
-  {
-    _id: "c2-2",
-    image: "https://picsum.photos/200",
-    name: "Cờ lê - mỏ lết",
-    slug: "co-le-mo-let",
-    parentId: "c2",
-  },
-  {
-    _id: "c2-3",
-    image: "https://picsum.photos/200",
-    name: "Tua vít",
-    slug: "tua-vit",
-    parentId: "c2",
-  },
-
-  {
-    _id: "c3-1",
-    image: "https://picsum.photos/200",
-    name: "Máy nén khí",
-    slug: "may-nen-khi",
-    parentId: "c3",
-  },
-  {
-    _id: "c3-2",
-    image: "https://picsum.photos/200",
-    name: "Máy phát điện",
-    slug: "may-phat-dien",
-    parentId: "c3",
-  },
-
-  {
-    _id: "c4-1",
-    name: "Máy trộn bê tông",
-    image: "https://picsum.photos/200",
-    slug: "may-tron-be-tong",
-    parentId: "c4",
-  },
-  {
-    _id: "c4-2",
-    image: "https://picsum.photos/200",
-    name: "Máy đầm",
-    slug: "may-dam",
-    parentId: "c4",
-  },
-
-  {
-    _id: "c5-1",
-    image: "https://picsum.photos/200",
-    name: "Ổ cắm - công tắc",
-    slug: "o-cam-cong-tac",
-    parentId: "c5",
-  },
-  {
-    _id: "c5-2",
-    image: "https://picsum.photos/200",
-    name: "Dây điện",
-    slug: "day-dien",
-    parentId: "c5",
-  },
-
-  {
-    _id: "c6-1",
-    image: "https://picsum.photos/200",
-    name: "Mũi khoan",
-    slug: "mui-khoan",
-    parentId: "c6",
-  },
-  {
-    _id: "c6-2",
-    image: "https://picsum.photos/200",
-    name: "Đá cắt",
-    slug: "da-cat",
-    parentId: "c6",
-  },
-
-  {
-    _id: "c7-1",
-    image: "https://picsum.photos/200",
-    name: "Thước đo",
-    slug: "thuoc-do",
-    parentId: "c7",
-  },
-  {
-    _id: "c7-2",
-    image: "https://picsum.photos/200",
-    name: "Máy đo điện",
-    slug: "may-do-dien",
-    parentId: "c7",
-  },
-
-  {
-    _id: "c8-1",
-    image: "https://picsum.photos/200",
-    name: "Bulông - ốc vít",
-    slug: "bu-long-oc-vit",
-    parentId: "c8",
-  },
-  {
-    _id: "c8-2",
-    image: "https://picsum.photos/200",
-    name: "Thanh ren",
-    slug: "thanh-ren",
-    parentId: "c8",
-  },
-
-  {
-    _id: "c9-1",
-    image: "https://picsum.photos/200",
-    name: "Mũ bảo hộ",
-    slug: "mu-bao-ho",
-    parentId: "c9",
-  },
-  {
-    _id: "c9-2",
-    image: "https://picsum.photos/200",
-    name: "Găng tay bảo hộ",
-    slug: "gang-tay-bao-ho",
-    parentId: "c9",
-  },
-
-  {
-    _id: "c10-1",
-    image: "https://picsum.photos/200",
-    name: "Quạt điện",
-    slug: "quat-dien",
-    parentId: "c10",
-  },
-  {
-    _id: "c10-2",
-    image: "https://picsum.photos/200",
-    name: "Nồi cơm điện",
-    slug: "noi-com-dien",
-    parentId: "c10",
-  },
-];
-
-export const Header = () => {
+export const Header = ({ categories }: HeaderProps) => {
+  const { totalItems } = useCart();
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState("");
   const [showSearch, setShowSearch] = useState<boolean>(false);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const q = searchQuery.trim();
+    if (q) router.push(`/product?search=${encodeURIComponent(q)}`);
+  };
   const handleShowSearch = () => {
     setShowSearch(true);
   };
@@ -412,14 +126,21 @@ export const Header = () => {
                 <p className=" text-white">Cửa hàng</p>
               </Link>
             </div>
-            <div className="bg-white hidden md:flex border border-gray-200 rounded-lg focus-within:border-blue-500 transition-colors duration-300 flex-1 items-center gap-2">
+            <form
+              onSubmit={handleSearch}
+              className="bg-white hidden md:flex border border-gray-200 rounded-lg focus-within:border-blue-500 transition-colors duration-300 flex-1 items-center gap-2"
+            >
               <input
                 type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 className="flex-1 p-2 focus:outline-none placeholder:text-sm placeholder:tracking-tighter placeholder:text-gray-400"
                 placeholder="Bạn muốn mua gì hôm này?"
               />
-              <CiSearch className="text-gray-700 mr-2" />
-            </div>
+              <button type="submit" className="p-2 cursor-pointer">
+                <CiSearch className="text-gray-700" />
+              </button>
+            </form>
             {/* search mobile */}
             <div className="">
               <button
@@ -431,10 +152,20 @@ export const Header = () => {
               </button>
             </div>
             <div className="shrink-0">
-              <button className="p-2 hidden md:flex bg-orange-500 rounded-lg items-center gap-2 cursor-pointer hover:bg-orange-600 transition-colors duration-300">
-                <p className=" text-white">Giỏ hàng</p>
-                <AiOutlineShoppingCart className="text-white" />
-              </button>
+              <Link
+                href="/cart"
+                className="p-2 hidden md:flex bg-orange-500 rounded-lg items-center gap-2 cursor-pointer hover:bg-orange-600 transition-colors duration-300 relative"
+              >
+                <p className="text-white">Giỏ hàng</p>
+                <div className="relative">
+                  <AiOutlineShoppingCart className="text-white" />
+                  {totalItems > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center leading-none">
+                      {totalItems > 99 ? "99+" : totalItems}
+                    </span>
+                  )}
+                </div>
+              </Link>
             </div>
           </div>
         </div>

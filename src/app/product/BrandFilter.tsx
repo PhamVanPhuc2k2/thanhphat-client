@@ -51,13 +51,19 @@ export function BrandFilter({ brands }: Props) {
                       : "border-gray-200"
                   }`}
                 >
-                  <Image
-                    src={brand.logo}
-                    alt="logo"
-                    width={1200}
-                    height={900}
-                    className="w-28 h-10 object-cover rounded-lg"
-                  />
+                  {brand.logo?.url ? (
+                    <Image
+                      src={brand.logo.url}
+                      alt={brand.name}
+                      width={1200}
+                      height={900}
+                      className="w-28 h-10 object-contain rounded-lg"
+                    />
+                  ) : (
+                    <span className="w-28 h-10 flex items-center justify-center text-xs font-semibold text-gray-600">
+                      {brand.name}
+                    </span>
+                  )}
                 </button>
               ))}
             </div>

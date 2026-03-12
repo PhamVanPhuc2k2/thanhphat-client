@@ -26,7 +26,7 @@ export default function Banner({ data }: Props) {
       {data.map((banner, i) => {
         const image = (
           <Image
-            src={banner.image}
+            src={banner.image.url}
             alt="banner"
             width={1200}
             height={900}
